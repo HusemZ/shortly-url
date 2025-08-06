@@ -1,0 +1,51 @@
+{
+  "name": "shortly-url",
+  "version": "1.0.0",
+  "description": "TypeScript ile yazılmış, Clean Architecture prensiplerine uygun, profesyonel bir URL kısaltıcı paketi.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "rimraf ./dist && tsc",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "prepublishOnly": "npm test && npm run lint && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HusemZ/shortly-url.git"
+  },
+  "keywords": [
+    "url",
+    "shortener",
+    "link",
+    "typescript",
+    "clean-architecture"
+  ],
+  "author": "Hüsem Kulaksız <moonrise.jpg@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HusemZ/shortly-url/issues"
+  },
+  "homepage": "https://github.com/HusemZ/shortly-url#readme",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "jest": "^30.0.5",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
