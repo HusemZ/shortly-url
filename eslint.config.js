@@ -1,12 +1,24 @@
-module.exports = {
-  parser: '@typescript-eslint/parser',
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
+import parser from '@typescript-eslint/parser';
+import plugin from '@typescript-eslint/eslint-plugin';
+import prettier from 'eslint-config-prettier';
+
+export default [
+  {
+    files: ['**/*.ts'],
+    languageOptions: {
+      parser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': plugin,
+    },
+    rules: {},
   },
-  rules: {},
-};
+  {
+    name: 'prettier',
+    ...prettier,
+  },
+];
