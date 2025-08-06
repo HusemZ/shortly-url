@@ -1,20 +1,20 @@
-# Kisa-Link-TS
+# Shortly-Url
 
-TypeScript ile yazılmış, Clean Architecture prensiplerine uygun, profesyonel ve test edilebilir bir URL kısaltıcı paketi.
+A professional, testable URL shortener package written in TypeScript following Clean Architecture principles.
 
-Bu paket, uzun URL'leri kısa, benzersiz kodlara dönüştürmenizi ve daha sonra bu kodları orijinal URL'lere geri çözmenizi sağlar.
+This package allows you to convert long URLs into short, unique codes and later resolve those codes back to the original URLs.
 
-## Özellikler
+## Features
 
-- **TypeScript:** Tamamen TypeScript ile yazılmıştır, bu da tip güvenliği ve daha iyi bir geliştirici deneyimi sunar.
-- **Clean Architecture:** İş mantığı, altyapıdan tamamen ayrılmıştır. Bu, kodun test edilmesini ve bakımını kolaylaştırır.
-- **Bağımlılıksız Çekirdek:** Çekirdek mantık, herhangi bir veritabanı veya framework'e bağımlı değildir.
-- **Test Edilebilir:** %100 test edilebilir olacak şekilde tasarlanmıştır. Jest ile birim testleri içerir.
-- **Esnek:** Varsayılan olarak hafızada (in-memory) çalışır, ancak kendi veritabanı implementasyonunuzu (örn: Redis, MongoDB) kolayca entegre edebilirsiniz.
+- **TypeScript:** Fully written in TypeScript, offering type safety and a better developer experience.
+- **Clean Architecture:** Business logic is completely decoupled from infrastructure, making the code easier to test and maintain.
+- **Dependency-Free Core:** Core logic is independent of any database or framework.
+- **Testable:** Designed to be 100% testable. Includes unit tests using Jest.
+- **Flexible:** Runs in-memory by default, but you can easily integrate your own storage implementation (e.g., Redis, MongoDB).
 
-## Kurulum
+## Installation
 
-npm veya yarn kullanarak paketi projenize ekleyin:
+Add the package to your project using npm or yarn:
 
 ```bash
 npm install @ifuzzer/shortly-url
@@ -24,53 +24,52 @@ npm install @ifuzzer/shortly-url
 yarn add @ifuzzer/shortly-url
 ```
 
-## Kullanım
+## Usage
 
-Paketi projenize dahil etmek ve kullanmak oldukça basittir.
+Using the package is simple and straightforward.
 
 ```typescript
 import { UrlShortener } from '@ifuzzer/shortly-url';
 
 async function main() {
-  // Yeni bir kısaltıcı nesnesi oluşturun
+  // Create a new shortener instance
   const shortener = new UrlShortener();
 
-  // 1. Bir URL'yi kısaltın
-  const longURL =
-    '[https://tr.wikipedia.org/wiki/Anasayfa](https://tr.wikipedia.org/wiki/Anasayfa)';
+  // 1. Shorten a URL
+  const longURL = 'https://tr.wikipedia.org/wiki/Anasayfa';
   const shortCode = await shortener.shorten(longURL);
 
-  console.log(`URL Kısaltıldı: ${longURL} -> ${shortCode}`);
-  // Örnek Çıktı: URL Kısaltıldı: [https://tr.wikipedia.org/wiki/Anasayfa](https://tr.wikipedia.org/wiki/Anasayfa) -> aB1xZ9c
+  console.log(`URL Shortened: ${longURL} -> ${shortCode}`);
+  // Example Output: URL Shortened: https://tr.wikipedia.org/wiki/Anasayfa -> aB1xZ9c
 
-  // 2. Kısa kodu orijinal URL'ye çözün
+  // 2. Resolve the short code back to the original URL
   const originalURL = await shortener.resolve(shortCode);
 
   if (originalURL) {
-    console.log(`Kod Çözüldü: ${shortCode} -> ${originalURL}`);
-    // Çıktı: Kod Çözüldü: aB1xZ9c -> [https://tr.wikipedia.org/wiki/Anasayfa](https://tr.wikipedia.org/wiki/Anasayfa)
+    console.log(`Code Resolved: ${shortCode} -> ${originalURL}`);
+    // Output: Code Resolved: aB1xZ9c -> https://tr.wikipedia.org/wiki/Anasayfa
   }
 
-  // 3. Var olmayan bir kodu çözmeyi deneyin
-  const nonExistent = await shortener.resolve('olmayankod');
-  console.log(`Var olmayan kodun sonucu: ${nonExistent}`);
-  // Çıktı: Var olmayan kodun sonucu: null
+  // 3. Try resolving a non-existent code
+  const nonExistent = await shortener.resolve('nonexistentcode');
+  console.log(`Non-existent code result: ${nonExistent}`);
+  // Output: Non-existent code result: null
 }
 
 main();
 ```
 
-## Geliştirme
+## Development
 
-Bu repoyu klonladıktan sonra bağımlılıkları yükleyin:
+After cloning the repo, install the dependencies:
 
 ```bash
 npm install
 ```
 
-### Kullanılabilir Script'ler
+### Available Scripts
 
-- `npm run build`: `src` klasöründeki TypeScript kodunu `dist` klasörüne derler.
-- `npm test`: Projedeki tüm testleri çalıştırır.
-- `npm run lint`: Kod stilini ve potansiyel hataları kontrol eder.
-- `npm run format`: Prettier kullanarak kod formatını düzenler.
+- `npm run build`: Compiles the TypeScript code in the `src` folder into the `dist` folder.
+- `npm test`: Runs all tests in the project.
+- `npm run lint`: Checks code style and potential issues.
+- `npm run format`: Formats the code using Prettier.
